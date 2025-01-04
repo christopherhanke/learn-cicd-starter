@@ -39,7 +39,7 @@ func TestFalseAPIKey(t *testing.T) {
 	}{
 		{"no ApiKey", errors.New("malformed authorization header")},
 		{"ApiKey", errors.New("malformed authorization header")},
-		{"", ErrNoAuthHeaderIncluded},
+		{"", errors.New("no authorization header included")},
 	}
 
 	for _, test := range tests {
