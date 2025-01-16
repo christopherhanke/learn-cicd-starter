@@ -9,6 +9,10 @@ jobs:
         name: Deploy
         runs-on: ubuntu-latest
 
+        permissions:
+          contents: read
+          id-token: write
+
         steps:
             - name: Check out code
               uses: actions/checkout@v4
@@ -20,3 +24,16 @@ jobs:
             
             - name: Build
               run: ./scripts/buildprod.sh
+
+            - name: auth gclod
+              uses: 'google-github-actions/auth@v2'
+              with:
+                service_account: 'cloud-run-deployer@notely-447720.iam.gserviceaccount.com'
+                credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+            
+            - name: Set up Cloud SDK
+              uses: 'google-github-actions/setup-gcloud@v2'
+            
+            - name: Use gcloud CLI
+              uses: gcloud info
+            
