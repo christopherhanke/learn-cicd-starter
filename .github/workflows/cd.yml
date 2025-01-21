@@ -28,7 +28,6 @@ jobs:
             - name: auth gclod
               uses: google-github-actions/auth@v2
               with:
-                service_account: cloud-run-deployer@notely-447720.iam.gserviceaccount.com
                 credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
             
             - name: Set up Cloud SDK
